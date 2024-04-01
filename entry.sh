@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # vsftpd container entrypoint script
 
 set -e
@@ -16,7 +16,8 @@ fi
 
 # Support multiple users
 while read -r user; do
-  IFS=: read -r name pass <<< "${!user}"
+  name="${user%:*}"
+  pass="${user#*:}"
   echo "Adding user ${name}"
   /add-virtual-user.sh "${name}" "${pass}"
 done < <(env | grep "FTP_USER_" | sed 's/^\(FTP_USER_[a-zA-Z0-9]*\)=.*/\1/')

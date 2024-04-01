@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # Adds a virtual ftp user to /etc/vsftpd/virtual-users.db
 
 set -e
@@ -21,4 +21,4 @@ if [[ "${1}" == "-d" ]]; then
   shift
 fi
 
-printf '%s\n%s\n' "${1}" "${2}" | db5.3_load -T -t hash "${DB}"
+printf '%s\n%s\n' "${1}" "${2}" | db_load -T -t hash "${DB}"
