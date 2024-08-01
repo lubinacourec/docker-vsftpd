@@ -1,6 +1,6 @@
 NAME := vsftpd
 TAG  := latest
-IMAGE_NAME := panubo/$(NAME)
+IMAGE_NAME := colmenaeu/$(NAME)
 
 .PHONY: build build-local bash run run-ssl help push clean
 help:

@@ -36,7 +36,7 @@ which is in the _whois_ debian package.
 ## Usage Example
 
 ```
-docker run --rm -it -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER=ftp -e FTP_PASSWORD=ftp docker.io/makertim/sftpserver:alpine
+docker run --rm -it -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER=ftp -e FTP_PASSWORD=ftp docker.io/colmenaeu/vsftpd:latest
 ```
 
 ## SSL Usage
@@ -50,10 +50,10 @@ into the container read-only.
 
 ```
 docker run --rm -it \
--e FTP_USER=makertim -e FTP_PASSWORD_HASH='$6$XWpu...DwK1' \
+-e FTP_USER=ftpuser -e FTP_PASSWORD_HASH='$6$XWpu...DwK1' \
 -v `pwd`/server.pem:/etc/ssl/certs/vsftpd.crt:ro \
 -v `pwd`/server.pem:/etc/ssl/private/vsftpd.key:ro \
-docker.io/makertim/sftpserver:alpine vsftpd /etc/vsftpd_ssl.conf
+docker.io/colmenaeu/vsftpd:latest vsftpd /etc/vsftpd_ssl.conf
 ```
 
 ## Security
