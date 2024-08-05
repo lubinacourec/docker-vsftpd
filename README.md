@@ -8,13 +8,25 @@ the client.
 
 ## Virtual Users
 
-This VSFTPD container uses virtual users. Each user that logs in will have the same system UID and GID. The real users has UID and GID of 48:48 by default, however using build-args this can be changed when building the container.
+Virtual Users require libs to manage the user database.
+Alpine does not have these by default, so I have discarded Virtual Users.
 
-For example use `--build-arg FTP_UID=1000 --build-arg FTP_GID=1000` to set the UID and GID to 1000:1000.
+## Guest Users
+
+Guest users are almost as good as virtual users.
+The local users (users in /etc/passwd) are remaped to a single user (ftp by default)
+
+```
+local_enable=YES
+guest_enable=YES
+guest_username=ftp
+```
 
 ## Options
 
 The following environment variables are accepted.
+
+Users Option 1:
 
 - `FTP_USER`: Sets the default FTP user
 
@@ -23,6 +35,8 @@ The following environment variables are accepted.
 - `FTP_PASSWORD_HASH`: Sets the password for the user specified by `FTP_USER`. This
 requires a hashed password such as the ones created with `mkpasswd -m sha-512`
 which is in the _whois_ debian package.
+
+Users Option 2:
 
 - `FTP_USER_*`: Adds multiple users. Value must be in the form of `username:hash`. Should not be used in conjunction with `FTP_USER` and `FTP_PASSWORD(_HASH)`.
 

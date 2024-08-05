@@ -1,7 +1,7 @@
-FROM alpine:latest
+FROM alpine:3.20.2
 
 RUN set -x \
-  && apk add --no-cache vsftpd whois db-utils \
+  && apk add --no-cache vsftpd whois shadow \
   ;
 
 RUN set -x \
@@ -11,7 +11,7 @@ RUN set -x \
   ;
 
 COPY vsftpd*.conf /etc/
-COPY vsftpd_virtual /etc/pam.d/
+#COPY vsftpd_virtual /etc/pam.d/
 COPY *.sh /
 
 VOLUME ["/etc/vsftpd", "/srv"]
