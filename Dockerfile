@@ -14,7 +14,7 @@ COPY vsftpd*.conf /etc/
 #COPY vsftpd_virtual /etc/pam.d/
 COPY *.sh /
 
-VOLUME ["/etc/vsftpd", "/srv"]
+VOLUME ["/etc/vsftpd", "/srv", "/var/log"]
 
 EXPOSE 21 4559 4560 4561 4562 4563 4564
 
