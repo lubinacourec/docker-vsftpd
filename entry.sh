@@ -27,9 +27,9 @@ fi
 while read -r user; do
   name="${user%:*}"
   pass="${user#*:}"
-  echo "Adding user ${name}"
+  echo "User ${name}"
   /add-ftp-user.sh "${name}" "${pass}"
-done < <(env | grep "FTP_USER_" | sed 's/^FTP_USER_[a-zA-Z0-9]*=\(.*\)/\1/')
+done < <(env | grep "^FTP_USER_" | sed 's/^FTP_USER_[a-zA-Z0-9_]*=\(.*\)/\1/')
 
 
 vsftpd_stop() {
