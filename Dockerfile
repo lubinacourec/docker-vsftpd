@@ -1,7 +1,7 @@
 FROM alpine:3.20.2
 
 RUN set -x \
-  && apk add --no-cache vsftpd whois shadow \
+  && apk add --no-cache vsftpd whois shadow tzdata \
   ;
 
 RUN set -x \
