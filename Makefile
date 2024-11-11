@@ -1,13 +1,11 @@
 NAME := vsftpd
-TAG  := latest
+TAG  := 3.20.3-2
 IMAGE_NAME := colmenaeu/$(NAME)
 
 .PHONY: build build-local bash run run-ssl help push clean
-help:
-	@printf "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\x1b[36m\1\\x1b[m:\2/' | column -c2 -t -s :)\n"
 
 build: ## Build for publishing
-	docker build --pull -t $(IMAGE_NAME):$(TAG) .
+	docker build --pull -t $(IMAGE_NAME):$(TAG) -t $(IMAGE_NAME):latest .
 
 build-local: ## Builds with local users UID and GID
 	docker build --build-arg FTP_UID=$(shell id -u) --build-arg FTP_GID=$(shell id -g) -t $(IMAGE_NAME):$(TAG) .
@@ -37,7 +35,18 @@ run-ssl: env vsftpd.pem
 	@docker kill ${ID}
 
 push: ## Pushes the docker image to hub.docker.com
-	docker push $(IMAGE_NAME):$(TAG)
+	docker push $(IMAGE_NAME) --all-tags
 
 clean: ## Remove built images
 	docker rmi $(IMAGE_NAME):$(TAG)
+
+#
+# Help magic
+#
+help: ## show help message
+	@awk \
+	'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} \
+	/^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } \
+	/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' \
+	$(MAKEFILE_LIST)
+
