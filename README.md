@@ -72,8 +72,7 @@ docker.io/colmenaeu/vsftpd:latest vsftpd /etc/vsftpd_ssl.conf
 
 ## Security
 
-Currently `allow_writeable_chroot` is turned ON, however this isn't recommended as a security precaution. We might look at making this configurable in the future. The main consequence of turning this off is that the `local_root` can not be writable by the FTP user.
-
+allow_writable_chroot is set to NO.
 See [serverfault: vsftp: whu is allow_writable_chroot=YES a bad idea?](https://serverfault.com/q/743949/259651)
 
 ## Logs
