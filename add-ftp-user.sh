@@ -27,3 +27,11 @@ if ! stat -c "%U:%G" "${BASE_HOME}/${username}" | grep -q "^root:root$" ; then
   echo "Changing owner for the new home dir to root..."
   chown root:root "${BASE_HOME}/${username}"
 fi
+
+# use shared home. vars are named badly. set $USE_SHARED_HOME to have all users chrooted in /srv/ftp (or whatever)
+# setting local_root to /srv/ftp in vsftpd.conf doesnt work here.
+if [ -z "$USE_SHARED_HOME" ]; then
+  usermod -d "/${BASE_HOME}/${username}" "${username}"
+else
+  usermod -d "/${BASE_HOME}/${USER}" "${username}"
+fi
