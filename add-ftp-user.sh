@@ -22,7 +22,8 @@ if ! getent shadow "${username}" | grep -q ":${pass_hash}:" ; then
   echo "Setting ${username} hash password..."
   echo "${username}:${pass_hash}" | chpasswd -e
 fi
-if ! stat -c "%U:%G" "${BASE_HOME}/${username}" | grep -q "^ftp:ftp$" ; then
-  echo "Changing owner for the new home dir to ftp..."
-  chown ftp:ftp "${BASE_HOME}/${username}"
+### for writable_chroot=no this dir should be unwritable, and a writable directory created inside it for files
+if ! stat -c "%U:%G" "${BASE_HOME}/${username}" | grep -q "^root:root$" ; then
+  echo "Changing owner for the new home dir to root..."
+  chown root:root "${BASE_HOME}/${username}"
 fi
