@@ -11,6 +11,9 @@ if [[ -n "${TZ}" ]] &&
   ln -s "/usr/share/zoneinfo/${TZ}" /etc/localtime
 fi
 
+#make user root unwritable
+chmod 755 "/srv/$USER"
+
 # BASE_HOME, vsftpd config "user_sub_token" and the home dir for the "ftp" user
 # need to be coordinated:
 export BASE_HOME='/srv'
