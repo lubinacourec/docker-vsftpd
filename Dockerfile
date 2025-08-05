@@ -1,4 +1,4 @@
-FROM alpine:3.20.3
+FROM alpine:3.20
 
 RUN set -x \
   && apk add --no-cache vsftpd whois shadow tzdata \
