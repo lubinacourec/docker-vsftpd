@@ -5,20 +5,14 @@ set -e
 
 [[ "${DEBUG}" == "true" ]] && set -x
 
-if [[ -n "${TZ}" ]] &&
-   [[ -f "/usr/share/zoneinfo/${TZ}" ]] &&
-   [[ ! -e "/etc/localtime" ]]; then
-  ln -s "/usr/share/zoneinfo/${TZ}" /etc/localtime
-fi
-
-if [[ -z "$USER" ]]; then
+if [[ -z "${USER}" ]]; then
   USER='ftp'
 fi
 
 #make ftp root unwritable
-mkdir "/srv/${USER}"
-chown root:root "/srv/${USER}"
-chmod 755 "/srv/${USER}"
+mkdir -p "/srv/${USER}"
+chown root:root "/srv/${USER}" || true
+chmod 755 "/srv/${USER}" || true
 
 # BASE_HOME, vsftpd config "user_sub_token" and the home dir for the "ftp" user
 # need to be coordinated:
