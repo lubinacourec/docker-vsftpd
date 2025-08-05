@@ -50,7 +50,7 @@ Users Option 2:
 ## Usage Example
 
 ```
-docker run --rm -it -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER=ftp -e FTP_PASSWORD=ftp docker.io/colmenaeu/vsftpd:latest
+docker run --rm -it -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER=ftp -e FTP_PASSWORD=ftp docker.io/kvieta/vsftpd:latest
 ```
 
 ## SSL Usage
@@ -67,7 +67,7 @@ docker run --rm -it \
 -e FTP_USER=ftpuser -e FTP_PASSWORD_HASH='$6$XWpu...DwK1' \
 -v `pwd`/server.pem:/etc/ssl/certs/vsftpd.crt:ro \
 -v `pwd`/server.pem:/etc/ssl/private/vsftpd.key:ro \
-docker.io/colmenaeu/vsftpd:latest vsftpd /etc/vsftpd_ssl.conf
+docker.io/kvieta/vsftpd:latest vsftpd /etc/vsftpd_ssl.conf
 ```
 
 ## Security
