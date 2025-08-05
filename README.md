@@ -40,12 +40,6 @@ Users Option 2:
 
 - `FTP_USER_*`: Adds multiple users. Value must be in the form of `username:hash`. Should not be used in conjunction with `FTP_USER` and `FTP_PASSWORD(_HASH)`.
 
-- `FTP_USERS_ROOT`: if set the vsftpd `local_root` will be set to `/srv/$USER` so each user is chrooted to their own directory instead of a shared one.
-
-- `FTP_CHOWN_ROOT`: if set `chown` will be run against `/srv` setting the FTP user and group as owner and group of the directory. _Note: chown is run non-recursively ie. will only chown the root`_
-
-- `FTP_PASV_ADDRESS`: override the IP address that vsftpd will advertise in
-  response to the PASV command
 
 ## Usage Example
 
